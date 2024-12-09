@@ -99,7 +99,7 @@ class Character {
     return this._conversation;
   }
   describe() {
-    return `you have me ${this._name}. ${this._description}`;
+    return `This is ${this._name}. ${this._description}`;
   }
   converse() {
     return `${this._name} says ${this._conversation}`;
@@ -110,38 +110,38 @@ class Character {
 
 const Entrance = new Room("entrance");
 Entrance.description =
-  "The entrance is very welcoming with fairy lights all around. Flame will meet you here.";
+  "fairy lights and flowers. Snuggles the Dragon is here to greet you.";
 const Dungeon = new Room("dungeon");
-dungeon.description = "You've entered a dark, damp, miserable place. Flame moved out weeks ago he just couldn't bare it.";
-const GamesRoom = new Room("Games Room");
-GamesRoom.description = "a large room with a pool table at it's centre";
+Dungeon.description = "a dark, damp, miserable place. Snuggles moved out weeks ago he just couldn't bare it.";
+const GamesRoom = new Room("games room");
+GamesRoom.description = "a large card table at it's centre.  Trixy has a smirk on her face.  Don't let her win!";
 const Hall = new Room("hall");
 Hall.description =
-  "the hall is literred with broken paintings (Deniro's doing we guess).";
-
-Entrance.linkRoom("south", Dungeon, "snuggles");
-Entrance.linkRoom("east", Hall, "deniro");
-Dungeon.linkRoom("north", Entrance, "snuggles");
-Dungeon.linkRoom("east", GamesRoom, "trixy");
-GamesRoom.linkRoom("west", Dungeon, "Windy");
-GamesRoom.linkRoom("north", Hall, "deniro");
-Hall.linkRoom("south", GamesRoom, "trixy");
-Hall.linkRoom("west", Entrance, "snuggles");
-
-const snuggles = new Character("flame");
-snuggles.description = "Sunggles the Dragon is a friendly fella.  His favourite drink is a Flaming Lamborghini.  Do you have any on you? Give him his favourite drink and he will give you the flame to open the next room.";
-snuggles.conversation = "Hey there weary traveller, don't spose you got any Flaming Lambo onya?";
-const windy = new Character("windy");
-windy.description = "Windy was sent to live in the dungeon.  She's a beautiful fairy like creature but has a small social issue, which is why she now resides in the dungeon.";
-windy.conversation = "Not sure why they put me here, do you? If you know why I will tell you which direction to head and give you a can of beans.  I don't need them";
-const deniro = new Character("deniro");
-deniro.description = "Deniro is a very short and angry old man.  He hangs out in the hall like he's lost. Don't trust him.  He lies.";
-deniro.conversation = "where the heck do you think you're going?! You don't know do you.  Give me your can of Beans then go North or I will fight you!";
-const trixy = new Character("trixy");
-trixy.description = "Trixy is incredibly smart.  Her favourite game is tik-tac-toe.  Good luck.  You will need to win to carry on or you will be sent back to Flame.";
-trixy.conversation = "Phffff. You think you can beat me? Doubt it!";
+  "it is literred with broken paintings (Deniro's doing we guess).";
 
 
+
+const Snuggles = new Character("Snuggles");
+Snuggles.description = "Sunggles the Dragon is a friendly fella.  His favourite drink is a Flaming Lamborghini.  Do you have any on you? Give him his favourite drink and he will give you the flame to open the next room.";
+Snuggles.conversation = "Don't spose you got any Flaming Lambo onya?";
+const Windy = new Character("Windy");
+Windy.description = "Windy was sent to live in the dungeon.  She's a beautiful fairy like creature but has a small social issue, which is why she now resides in the dungeon.";
+Windy.conversation = "Not sure why they put me here, do you? If you know why I will tell you which direction to head and give you a can of beans.  I don't need them";
+const Napoleon = new Character("Napoleon");
+Napoleon.description = "Napoleon is a very short and angry old man.  He hangs out in the hall like he's lost a war. Don't trust him.  He has tiny man sydrome.";
+Napoleon.conversation = "Where the heck do you think you're going, this is all mine and more!  Give me your can of Beans then go North or I will fight you!";
+const Trixy = new Character("trixy");
+Trixy.description = "Trixy is incredibly smart.  Her favourite game is tik-tac-toe.  Good luck.  You will need to win to carry on or you will be sent back to Snuggles at the entrance.";
+Trixy.conversation = "Phffff. You think you can beat me? I'm Tricky Trixy!";
+
+Entrance.linkRoom("south", Dungeon);
+Entrance.linkRoom("east", Hall);
+Dungeon.linkRoom("north", Entrance);
+Dungeon.linkRoom("east", GamesRoom);
+GamesRoom.linkRoom("west", Dungeon);
+GamesRoom.linkRoom("north", Hall);
+Hall.linkRoom("south", GamesRoom);
+Hall.linkRoom("west", Entrance);
 
 
 
@@ -152,7 +152,11 @@ const displayRoomInfo = (room) => {
 
   if (room.character) {
     //logic for displaying chacter in the room and their dialogue
-  } else {
+    occupantMsg = `<strong>${character.name}</strong> is here. ${character.description}`;
+    // if (character.dialogue) {
+    //     occupantMsg += `<br><em>${character.dialogue}</em>`;
+    //   }
+} else {
     occupantMsg = "theres noone in this room";
   }
   textContent =
@@ -173,7 +177,7 @@ const displayRoomInfo = (room) => {
 };
 
 const startGame = () => {
-  currentRoom = Kitchen;
+  currentRoom = Entrance;
   displayRoomInfo(currentRoom);
 
   document.addEventListener("keydown", (event) => {
