@@ -1,9 +1,11 @@
-class Room {
+class room {
   constructor(name, description) {
     this._name = name;
     this._description = description;
     this._linkedRooms = {};
+    this._character = null;
   }
+
   get name() {
     return this._name;
   }
@@ -22,34 +24,33 @@ class Room {
 
   set description(value) {
     if (value.length < 4) {
-      alert("description is too short.");
+      alert("Description is too short.");
       return;
     }
     this._description = value;
   }
+
   describe() {
     return (
       "Looking around the " + this._name + " you can see " + this._description
     );
   }
+
   getDetails() {
-    // object entries returns an array of both the key and value of items in the object
     const entries = Object.entries(this._linkedRooms);
-    // initialise an empty details array which will hold the formatted string based on the linked room entries
     let details = [];
-    // use a for loop to loop over the entries array and specify we want the key and the value
     for (const [direction, room] of entries) {
-      // format a string based on the object. We only take the information we want.
       let text = `The ${room._name} is to the ${direction}`;
       details.push(text);
-      return details;
     }
+    return details.join("<br>");
   }
+
   move(direction) {
     if (direction in this._linkedRooms) {
       return this._linkedRooms[direction];
     } else {
-      alert("You can't go that way");
+      alert("You're Lost, try another way");
       return this;
     }
   }
@@ -57,10 +58,20 @@ class Room {
   linkRoom(direction, roomToLink) {
     this._linkedRooms[direction] = roomToLink;
   }
+
+  set character(character) {
+    this._character = character;
+  }
+
+  get character() {
+    return this._character;
+  }
 }
-class Character {
+
+class character {
   constructor(name) {
-    (this._name = name), (this._description = "");
+    this._name = name;
+    this._description = "";
     this._conversation = "";
   }
 
@@ -74,7 +85,7 @@ class Character {
 
   set description(value) {
     if (value.length < 4) {
-      alert("Decription is too short.");
+      alert("Description is too short.");
       return;
     }
     this._description = value;
@@ -82,11 +93,12 @@ class Character {
 
   set conversation(value) {
     if (value.length < 4) {
-      alert("conversation is too short.");
+      alert("Conversation is too short.");
       return;
     }
     this._conversation = value;
   }
+
   get name() {
     return this._name;
   }
@@ -98,68 +110,101 @@ class Character {
   get conversation() {
     return this._conversation;
   }
+
   describe() {
     return `This is ${this._name}. ${this._description}`;
   }
+
   converse() {
-    return `${this._name} says ${this._conversation}`;
+    return `${this._name} says: ${this._conversation}`;
   }
 }
 
-// for the assignment link character to room
+// Rooms and Characters
+const Entrance = new room(
+  "entrance",
+  "mirrors everywhere.  Quick grooming check before heading south into the Dungeon.  One must always look their best for the Dungeon. Jeffrey the buttler is here to greet you."
+);
+const Dungeon = new room(
+  "dungeon",
+  "a dark, damp, miserable place. But after you checked yourself in the mirrors you look fantastic!  Windy isn't too happy here but we think it's for the best. ahem..."
+);
 
-const Entrance = new Room("entrance");
-Entrance.description =
-  "fairy lights and flowers. Snuggles the Dragon is here to greet you.";
-const Dungeon = new Room("dungeon");
-Dungeon.description = "a dark, damp, miserable place. Snuggles moved out weeks ago he just couldn't bare it.";
-const GamesRoom = new Room("games room");
-GamesRoom.description = "a large card table at it's centre.  Trixy has a smirk on her face.  Don't let her win!";
-const Hall = new Room("hall");
-Hall.description =
-  "it is literred with broken paintings (Deniro's doing we guess).";
+const Hall = new room(
+  "hall",
+  "is littered with broken paintings (Napoleon's doing we guess)."
+);
+const GamesRoom = new room(
+  "games room",
+  "a large card table at its center. Trixy has a smirk on her face."
+);
+const BallRoom = new room(
+  "ball room",
+  "a very grand room and if you made it here you have won the game.  CONGRATULATIONS!!!"
+);
 
+// Characters
+const Jeffrey = new character("Jeffrey");
+Jeffrey.description =
+  "Jeffrey the butler is a snobbish tall bloke wearing his full butler kit.  he'll help you open the next room.";
+Jeffrey.conversation =
+  "'Ca va? Here is your key to the Dungeon 🔑  Head south now and mind your step. Au revoir.";
 
+const Windy = new character("Windy");
+Windy.description =
+  "Windy is a fairy-like creature who now resides in the dungeon due to her social issues.";
+Windy.conversation = "'Not sure why they put me here, do you?'";
 
-const Snuggles = new Character("Snuggles");
-Snuggles.description = "Sunggles the Dragon is a friendly fella.  His favourite drink is a Flaming Lamborghini.  Do you have any on you? Give him his favourite drink and he will give you the flame to open the next room.";
-Snuggles.conversation = "Don't spose you got any Flaming Lambo onya?";
-const Windy = new Character("Windy");
-Windy.description = "Windy was sent to live in the dungeon.  She's a beautiful fairy like creature but has a small social issue, which is why she now resides in the dungeon.";
-Windy.conversation = "Not sure why they put me here, do you? If you know why I will tell you which direction to head and give you a can of beans.  I don't need them";
-const Napoleon = new Character("Napoleon");
-Napoleon.description = "Napoleon is a very short and angry old man.  He hangs out in the hall like he's lost a war. Don't trust him.  He has tiny man sydrome.";
-Napoleon.conversation = "Where the heck do you think you're going, this is all mine and more!  Give me your can of Beans then go North or I will fight you!";
-const Trixy = new Character("trixy");
-Trixy.description = "Trixy is incredibly smart.  Her favourite game is tik-tac-toe.  Good luck.  You will need to win to carry on or you will be sent back to Snuggles at the entrance.";
-Trixy.conversation = "Phffff. You think you can beat me? I'm Tricky Trixy!";
+const Napoleon = new character("Napoleon");
+Napoleon.description =
+  "Napoleon is a short, angry old man. He hangs out in the hall, unlike the paintings that once did before he unhung them.  Don't listen to him, just keep on going weary traveller.";
+Napoleon.conversation =
+  "'Où penses-tu aller? Je t'accrocherai comme l'une de mes peintures si tu oses me passer!'";
 
+const Trixy = new character("Trixy");
+Trixy.description =
+  "Trixy think's she is smart. Her favourite game is tic-tac-toe. You've got this.  She isn't that good.";
+Trixy.conversation =
+  "'How very dare you narrator! You think you can beat me at my favourite game.  Good luck!'";
+
+const Marie = new character("Marie");
+Marie.description =
+  "Marie Antoinette greets you with cake, congratulates you on keeping your head and has a rant about Napoleon.";
+Trixy.conversation =
+  "'Ooh la la, regarde-toi avec ta tête sur les épaules. Félicitations pour ta quête, mon fidèle sujet.  Napoléon est un tel idiot'";
+
+// Linking characters to rooms
+Entrance.character = Jeffrey;
+Dungeon.character = Windy;
+Hall.character = Napoleon;
+GamesRoom.character = Trixy;
+BallRoom.character = Marie;
+
+// Linking rooms DIRECTIONS
 Entrance.linkRoom("south", Dungeon);
-Entrance.linkRoom("east", Hall);
 Dungeon.linkRoom("north", Entrance);
-Dungeon.linkRoom("east", GamesRoom);
-GamesRoom.linkRoom("west", Dungeon);
-GamesRoom.linkRoom("north", Hall);
+Dungeon.linkRoom("east", Hall);
 Hall.linkRoom("south", GamesRoom);
-Hall.linkRoom("west", Entrance);
+Hall.linkRoom("west", Dungeon);
+GamesRoom.linkRoom("west", BallRoom);
+GamesRoom.linkRoom("north", Hall);
+BallRoom.linkRoom("east", GamesRoom);
 
-
-
-//the room parameter to this function is a room object
-
+// Function to display room information
 const displayRoomInfo = (room) => {
   let occupantMsg = "";
 
+  // Check if the room has a character
   if (room.character) {
-    ////logic for displaying chacter in the room and their dialogue
+    const character = room.character; // Get the character from the room
     occupantMsg = `<strong>${character.name}</strong> is here. ${character.description}`;
-    // if (character.dialogue) {
-    //     occupantMsg += `<br><em>${character.dialogue}</em>`;
-    //   }
-} else {
-    occupantMsg = "theres noone in this room";
+    // Optional: Display character's conversation
+    occupantMsg += `<br><em>${character.conversation}</em>`;
+  } else {
+    occupantMsg = "There's no one in this room.";
   }
-  textContent =
+
+  let textContent =
     "<p>" +
     room.describe() +
     "</p>" +
@@ -176,13 +221,17 @@ const displayRoomInfo = (room) => {
   document.getElementById("usertext").focus();
 };
 
+// Starting the game
 const startGame = () => {
-  currentRoom = Entrance;
+  let currentRoom = Entrance;
   displayRoomInfo(currentRoom);
+
+  // Add the 'hidden' class to <h1> and <h2> elements when the game starts
+  document.querySelector("h1").classList.add("hidden");
+  document.querySelector("h2").classList.add("hidden");
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
-      //grab the contenst of the input box
       const command = document.getElementById("usertext").value;
       const directions = ["north", "south", "east", "west"];
 
@@ -191,11 +240,18 @@ const startGame = () => {
         document.getElementById("usertext").value = "";
         displayRoomInfo(currentRoom);
       } else {
-        alert("Not a valid command.  Please try again.");
+        alert("Not a valid command. Please try again.");
         displayRoomInfo(currentRoom);
         document.getElementById("usertext").value = "";
       }
     }
   });
 };
-startGame();
+
+document
+  .getElementById("startGameButton")
+  .addEventListener("click", function () {
+    document.getElementById("startGameButton").style.display = "none";
+    document.getElementById("gamearea").style.display = "block";
+    startGame();
+  });

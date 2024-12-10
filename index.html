@@ -4,10 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Game</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div>
-      <div id="gamearea">
+    <div id="background-overlay"></div>
+    <div id="main-container">
+      <div id="content">
+        <h1>Welcome to Versailles</h1>
+        <h2>Your royal journey awaits</h2>
+        <!-- Start Game Button -->
+        <button id="startGameButton">Start Game</button>
+      </div>
+
+      <div id="gamearea" style="display: none;"> <!-- Hide the game area initially -->
         <div id="details">
           <div>
             <p id="textarea"></p>
@@ -15,7 +24,18 @@
           </div>
         </div>
       </div>
+
+      <!-- Footer Content -->
+      <div id="footer">
+        <div id="footer-content">
+          <div id="marie-antoinette">
+            <img src="Marie.jpeg" alt="Marie Antoinette" />
+          </div>
+          <p class="footer-text">"Qu'ils mangent de la brioche" — Marie Antoinette</p>
+        </div>
+      </div>
     </div>
+
     <script src="index.js"></script>
   </body>
 </html>
