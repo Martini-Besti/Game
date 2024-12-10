@@ -151,7 +151,7 @@ const displayRoomInfo = (room) => {
   let occupantMsg = "";
 
   if (room.character) {
-    //logic for displaying chacter in the room and their dialogue
+    ////logic for displaying chacter in the room and their dialogue
     occupantMsg = `<strong>${character.name}</strong> is here. ${character.description}`;
     // if (character.dialogue) {
     //     occupantMsg += `<br><em>${character.dialogue}</em>`;
