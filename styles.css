@@ -37,74 +37,164 @@ h2 {
   background-repeat: no-repeat;
   background-attachment: fixed;
   opacity: 0.8;
-  justify-content: space-between; 
+  justify-content: space-between;
 }
 
 #background-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: -1;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
 
-  #content {
-    flex-grow: 1;
-    text-align: center;
-  }
+#content {
+  flex-grow: 1;
+  text-align: center;
+}
 /* Start Game Button */
 #startGameButton {
-    font-family: "Playfair Display", serif;
-    font-size: 2rem;
-    color: white;
-    background-color: #0d0d0d;
-    border: 2px solid gold;
-    padding: 20px 40px;
-    cursor: pointer;
-    text-align: center;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    margin: 30px auto;
-    display: block;
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  color: white;
+  background-color: #0d0d0d;
+  border: 2px solid gold;
+  padding: 20px 40px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  margin: 30px auto;
+  display: block;
+}
+
+#startGameButton:hover {
+  background-color: gold;
+  color: black;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Start of game */
+/* Game Area Container */
+#game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.7
+  ); /* Light background for readability */
+  border-radius: 12px;
+  padding: 20px;
+  width: 80%;
+  max-width: 800px; /* Max width for larger screens */
+  margin: 0 auto; /* Center the container horizontally */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow around the container */
+  font-family: "Merriweather", serif; /* Readable font for game text */
+  color: #0e0a05; /* Dark text for better contrast */
+}
+
+/* Styling for the text display area */
+#textarea {
+  font-size: 1.2rem; /* Larger text for better readability */
+  line-height: 1.5;
+  margin-bottom: 20px;
+  max-height: 300px;
+  overflow-y: auto;
+  white-space: pre-wrap; /* Keeps the formatting */
+  width: 100%; /* Take full width of the container */
+}
+
+/* Styling for the input area */
+#usertext {
+  font-size: 1.2rem;
+  padding: 10px;
+  width: 80%;
+  max-width: 500px;
+  margin-top: 20px;
+  border: 2px solid #0d0d0d;
+  border-radius: 8px;
+  background-color: white;
+  color: #0d0d0d;
+}
+
+/* Button area for submitting the input */
+#buttonarea {
+  margin-top: 15px;
+  text-align: center;
+}
+
+#usertext:focus {
+  outline: none; /* Remove default outline */
+  border-color: gold; /* Highlight with gold when focused */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #game-container {
+    width: 90%;
+    padding: 15px;
   }
-  
-  #startGameButton:hover {
-    background-color: gold;
-    color: black;
+
+  #textarea {
+    font-size: 1rem;
   }
-  
-  .hidden {
-    display: none;
+
+  #usertext {
+    font-size: 1rem;
+    width: 100%;
   }
+}
+/* Container for the room image */
+
+#room-image {
+  width: 100%; /* Image will take up full width of the container */
+  height: 100%; /* Image will take up full height of the container */
+  object-fit: cover; /* Ensures the image covers the entire container without distortion */
+  border-radius: 8px; /* Optional: rounded corners */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); /* Optional: add shadow around the image */
+}
+
+/* Styling the image */
+#room-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover; /* Ensure the image covers the container without distortion */
+  border-radius: 8px;
+}
 
 /* Footer styles */
 #footer {
-    background: url("Versailles.jpeg") no-repeat center center;
-    background-size: cover;
-    
-    height: 300px;
-    color: #f0e5d8;
-    font-family: "Playfair Display", serif;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    text-align: center;
-    border-top: 20px solid gold;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-    position: relative; 
-    z-index: 10; 
-  }
+  background: url("Versailles.jpeg") no-repeat center center;
+  background-size: cover;
 
+  height: 300px;
+  color: #f0e5d8;
+  font-family: "Playfair Display", serif;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  text-align: center;
+  border-top: 20px solid gold;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 10;
+}
 
 #footer-content {
   position: relative;
   z-index: 10;
 }
-
 
 .footer-text {
   font-size: 2rem;
@@ -120,14 +210,14 @@ h2 {
   position: absolute;
   bottom: 0;
   left: -200px;
-  animation: moveMarie 8s linear infinite;
+  animation: moveMarie 9s linear infinite;
 }
 
 #marie-antoinette img {
   width: 120px;
   height: auto;
   border-radius: 50%;
-  border: 5px solid #f8e1a5; 
+  border: 5px solid #f8e1a5;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 

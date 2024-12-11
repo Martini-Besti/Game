@@ -11,20 +11,28 @@
     <div id="main-container">
       <div id="content">
         <h1>Welcome to Versailles</h1>
-        <h2>Your royal journey awaits</h2>
+        <h2>Your royal journey awaits...</h2>
         <!-- Start Game Button -->
         <button id="startGameButton">Start Game</button>
       </div>
 
       <div id="gamearea" style="display: none;"> <!-- Hide the game area initially -->
-        <div id="details">
-          <div>
-            <p id="textarea"></p>
-            <div id="buttonarea"></div>
+        <div id="game-container">
+          <div id="room-image-container">
+            <img id="room-image" src="" alt="Room Image" />
+          </div>
+          <div id="details">
+            <div>
+              <p id="textarea"></p>
+              <div id="buttonarea">
+                <!-- Input area for commands -->
+                <input type="text" id="usertext" placeholder="Enter a command..."/>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
+      
       <!-- Footer Content -->
       <div id="footer">
         <div id="footer-content">
