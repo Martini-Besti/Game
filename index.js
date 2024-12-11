@@ -150,19 +150,20 @@ const BallRoom = new room(
 
 GamesRoom.questions = [
   {
-    question: "What was Marie Antoinette's favourite food?",
-    answer: 'Roast Duck',
+    question:
+      "Click the correct answer of what was Marie Antoinette's favourite food?",
+    answer: "Roast Duck",
     options: [
       {
-        answer: 'Roast Duck',
+        answer: "Roast Duck",
         correct: true,
       },
       {
-        answer: 'Foi Gras',
+        answer: "Foie Gras",
         correct: false,
       },
       {
-        answer: 'Beef Bourguignon',
+        answer: "Beef Bourguignon",
         correct: false,
       },
     ],
@@ -174,15 +175,16 @@ const Jeffrey = new character("Jeffrey");
 Jeffrey.description =
   "Jeffrey the butler is a snobbish tall bloke wearing his full butler kit.  He'll help you open the next room.";
 Jeffrey.conversation =
-  "'Ca va? Here is your key to the Dungeon 🔑  Head south now and mind your step. Au revoir.";
+  "'Ca va? Here is your key to the Dungeon 🔑  Head south to the Dungeon and mind your step. Au revoir.";
 
 const Snuggles = new character("Snuggles");
 Snuggles.description = "Snuggles the snuggly dragon would like a snuggle.  ";
-Snuggles.conversation = "'Bring it in here you!'";
+Snuggles.conversation =
+  "'Bring it in here you! (sunggles you to the brink of breaking wind)... You're mission is clear.  Head east but be careful.  Napoleon is in a bad mood!'";
 
 const Napoleon = new character("Napoleon");
 Napoleon.description =
-  "Happy looking chap isn't he. He hangs out in the hall, unlike the paintings that once did before he unhung them.  Don't listen to him, just keep on going weary traveller.";
+  "Happy looking chap isn't he. He hangs out in the hall, unlike the paintings that once did before he unhung them.  Don't listen to him, just keep on going weary traveller. And yeah we don't understand his accent either.  Just head to the games room.  You need to pass a test before 🥂 and 🎂 with Marie.";
 Napoleon.conversation =
   "'Où penses-tu aller? Je t'accrocherai comme l'une de mes peintures si tu oses me passer!'";
 
@@ -220,11 +222,11 @@ const roomImages = {
   entrance: "butler.jpeg",
   dungeon: "snuggles.jpg",
   hall: "napoleon.jpeg",
+  //the below code only works this way for some reason please check!!!!
   "games room": "louis.jpeg",
   "ball room": "ballroomMarie.jpeg",
 };
 
-// Function to display room information and update the room image
 const displayRoomInfo = (room) => {
   let occupantMsg = "";
 
@@ -239,22 +241,22 @@ const displayRoomInfo = (room) => {
 
   const validateAnswer = (isCorrect) => {
     console.log("This is working", isCorrect);
-    
+
     if (isCorrect) {
       room._correctAnswers++;
     }
-  
+
     // Check if the correct answer is selected and move to BallRoom
     if (isCorrect) {
       if (room === GamesRoom) {
         // Move to the BallRoom directly
-        room.move("west");  // BallRoom is to the west from GamesRoom
+        room.move("west"); // BallRoom is to the west from GamesRoom
         displayRoomInfo(BallRoom); // Show the BallRoom details
       }
     }
   };
-  
 
+  // If the room has questions, display them
   if (room._questions.length !== 0) {
     let html =
       "<div class='question-wrapper'>" +
@@ -284,11 +286,10 @@ const displayRoomInfo = (room) => {
     Array.from(answers).forEach((answer) => {
       answer.addEventListener("click", function () {
         const isCorrect = this.getAttribute("data-correct") === "true";
-        console.log(isCorrect)
+        console.log(isCorrect);
         validateAnswer(isCorrect);
       });
     });
-    
   } else {
     // Your existing else block code
     let textContent =
@@ -302,6 +303,14 @@ const displayRoomInfo = (room) => {
       room.getDetails() +
       "</p>";
     document.getElementById("textarea").innerHTML = textContent;
+  }
+
+  // Show or hide the "Take me back to the entrance" button if NOT in the Entrance
+  const backToEntranceButton = document.getElementById("backToEntranceButton");
+  if (room !== Entrance) {
+    backToEntranceButton.classList.remove("hidden");
+  } else {
+    backToEntranceButton.classList.add("hidden");
   }
 
   // Update the room image based on the current room

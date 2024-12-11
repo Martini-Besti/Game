@@ -294,3 +294,41 @@ input {
   transform: translateY(1px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+/* Styling for the "Take me back to the Entrance" button */
+#backToEntranceButton {
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  color: white;
+  background-color: #8b0000;
+  border: 2px solid gold;
+  padding: 15px 0px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  display: block;
+  width: auto;
+  max-width: 250px;
+  margin: 20px auto;
+}
+
+/* Hover effect when the mouse is over the button */
+#backToEntranceButton:hover {
+  background-color: gold;
+  color: #0d0d0d;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Active effect when the button is clicked */
+#backToEntranceButton:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Hidden button by default */
+#backToEntranceButton.hidden {
+  display: none;
+}
