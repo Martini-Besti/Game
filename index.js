@@ -190,7 +190,7 @@ GamesRoom.linkRoom("west", BallRoom);
 GamesRoom.linkRoom("north", Hall);
 BallRoom.linkRoom("east", GamesRoom);
 
-// Image mapping for each room
+// Image for each room
 const roomImages = {
     "entrance": "butler.jpeg",
     "dungeon": "snuggles.jpg",
@@ -207,7 +207,6 @@ const roomImages = {
     if (room.character) {
       const character = room.character; // Get the character from the room
       occupantMsg = `Meet <strong>${character.name}</strong>. ${character.description}`;
-      // Optional: Display character's conversation
       occupantMsg += `<br><em>${character.conversation}</em>`;
     } else {
       occupantMsg = "There's no one in this room.";
@@ -235,7 +234,7 @@ const roomImages = {
   
     // Update the button/input area for user commands
     document.getElementById("buttonarea").innerHTML =
-      '> <input type="text" id="usertext"/>';
+      '<input type="text" id="usertext"/>';
     document.getElementById("usertext").focus();
   };
   
@@ -274,3 +273,4 @@ const roomImages = {
       startGame();
     });
   
+    
