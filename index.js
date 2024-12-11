@@ -4,6 +4,8 @@ class room {
     this._description = description;
     this._linkedRooms = {};
     this._character = null;
+    this._questions = [];
+    this._correctAnswers = 0;
   }
 
   get name() {
@@ -12,6 +14,9 @@ class room {
 
   get description() {
     return this._description;
+  }
+  set questions(value) {
+    this._questions = value;
   }
 
   set name(value) {
@@ -143,6 +148,27 @@ const BallRoom = new room(
   "a grand room and if you made it here you have won the game.  CONGRATULATIONS!!!"
 );
 
+GamesRoom.questions = [
+  {
+    question: "What was Marie Antoinette's favourite food?",
+    answer: 'Roast Duck',
+    options: [
+      {
+        answer: 'Roast Duck',
+        correct: true,
+      },
+      {
+        answer: 'Foi Gras',
+        correct: false,
+      },
+      {
+        answer: 'Beef Bourguignon',
+        correct: false,
+      },
+    ],
+  },
+];
+
 // Characters
 const Jeffrey = new character("Jeffrey");
 Jeffrey.description =
@@ -151,8 +177,7 @@ Jeffrey.conversation =
   "'Ca va? Here is your key to the Dungeon 🔑  Head south now and mind your step. Au revoir.";
 
 const Snuggles = new character("Snuggles");
-Snuggles.description =
-  "Snuggles the snuggly dragon would like a snuggle.  ";
+Snuggles.description = "Snuggles the snuggly dragon would like a snuggle.  ";
 Snuggles.conversation = "'Bring it in here you!'";
 
 const Napoleon = new character("Napoleon");
@@ -192,27 +217,80 @@ BallRoom.linkRoom("east", GamesRoom);
 
 // Image for each room
 const roomImages = {
-    "entrance": "butler.jpeg",
-    "dungeon": "snuggles.jpg",
-    "hall": "napoleon.jpeg",
-    "games room": "louis.jpeg",
-    "ball room": "ballroomMarie.jpeg"
-  };
-  
-  // Function to display room information and update the room image
-  const displayRoomInfo = (room) => {
-    let occupantMsg = "";
-  
-    // Check if the room has a character
-    if (room.character) {
-      const character = room.character; // Get the character from the room
-      occupantMsg = `Meet <strong>${character.name}</strong>. ${character.description}`;
-      occupantMsg += `<br><em>${character.conversation}</em>`;
-    } else {
-      occupantMsg = "There's no one in this room.";
+  entrance: "butler.jpeg",
+  dungeon: "snuggles.jpg",
+  hall: "napoleon.jpeg",
+  "games room": "louis.jpeg",
+  "ball room": "ballroomMarie.jpeg",
+};
+
+// Function to display room information and update the room image
+const displayRoomInfo = (room) => {
+  let occupantMsg = "";
+
+  // Check if the room has a character
+  if (room.character) {
+    const character = room.character; // Get the character from the room
+    occupantMsg = `Meet <strong>${character.name}</strong>. ${character.description}`;
+    occupantMsg += `<br><em>${character.conversation}</em>`;
+  } else {
+    occupantMsg = "There's no one in this room.";
+  }
+
+  const validateAnswer = (isCorrect) => {
+    console.log("This is working", isCorrect);
+    
+    if (isCorrect) {
+      room._correctAnswers++;
     }
   
-    // Update the room description, character details, and linked rooms
+    // Check if the correct answer is selected and move to BallRoom
+    if (isCorrect) {
+      if (room === GamesRoom) {
+        // Move to the BallRoom directly
+        room.move("west");  // BallRoom is to the west from GamesRoom
+        displayRoomInfo(BallRoom); // Show the BallRoom details
+      }
+    }
+  };
+  
+
+  if (room._questions.length !== 0) {
+    let html =
+      "<div class='question-wrapper'>" +
+      "<div>" +
+      room._questions
+        .map((question) => {
+          return "<p>" + question.question + "</p>";
+        })
+        .join("") +
+      "</div>" +
+      "<div class='answer-wrapper'>" +
+      room._questions
+        .map((question) => {
+          return question.options
+            .map((option) => {
+              return `<p class='answer' data-correct='${option.correct}'>${option.answer}</p>`;
+            })
+            .join("");
+        })
+        .join("") +
+      "</div>" +
+      "</div>";
+    document.getElementById("textarea").innerHTML = html;
+
+    // Add event listeners AFTER inserting the HTML
+    const answers = document.getElementsByClassName("answer");
+    Array.from(answers).forEach((answer) => {
+      answer.addEventListener("click", function () {
+        const isCorrect = this.getAttribute("data-correct") === "true";
+        console.log(isCorrect)
+        validateAnswer(isCorrect);
+      });
+    });
+    
+  } else {
+    // Your existing else block code
     let textContent =
       "<p>" +
       room.describe() +
@@ -223,54 +301,51 @@ const roomImages = {
       "<p>" +
       room.getDetails() +
       "</p>";
-  
-    // Update the room text content
     document.getElementById("textarea").innerHTML = textContent;
-  
-    // Update the room image based on the current room
-    const roomImage = document.getElementById("room-image");
-    const roomImagePath = roomImages[room.name.toLowerCase()] || ""; // Default to an empty string if no match
-    roomImage.src = roomImagePath;
-  
-    // Update the button/input area for user commands
-    document.getElementById("buttonarea").innerHTML =
-      '<input type="text" id="usertext"/>';
-    document.getElementById("usertext").focus();
-  };
-  
-  // Starting the game
-  const startGame = () => {
-    let currentRoom = Entrance;
-    displayRoomInfo(currentRoom);
-  
-    // Add the 'hidden' class to <h1> and <h2> elements when the game starts
-    document.querySelector("h1").classList.add("hidden");
-    document.querySelector("h2").classList.add("hidden");
-  
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") {
-        const command = document.getElementById("usertext").value;
-        const directions = ["north", "south", "east", "west"];
-  
-        if (directions.includes(command.toLowerCase())) {
-          currentRoom = currentRoom.move(command);
-          document.getElementById("usertext").value = "";
-          displayRoomInfo(currentRoom);
-        } else {
-          alert("Not a valid command. Please try again.");
-          displayRoomInfo(currentRoom);
-          document.getElementById("usertext").value = "";
-        }
+  }
+
+  // Update the room image based on the current room
+  const roomImage = document.getElementById("room-image");
+  const roomImagePath = roomImages[room.name.toLowerCase()] || ""; // Default to an empty string if no match
+  roomImage.src = roomImagePath;
+
+  // Update the button/input area for user commands
+  document.getElementById("buttonarea").innerHTML =
+    '<input type="text" id="usertext"/>';
+  document.getElementById("usertext").focus();
+};
+
+// Starting the game
+const startGame = () => {
+  let currentRoom = Entrance;
+  displayRoomInfo(currentRoom);
+
+  // Add the 'hidden' class to <h1> and <h2> elements when the game starts
+  document.querySelector("h1").classList.add("hidden");
+  document.querySelector("h2").classList.add("hidden");
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      const command = document.getElementById("usertext").value;
+      const directions = ["north", "south", "east", "west"];
+
+      if (directions.includes(command.toLowerCase())) {
+        currentRoom = currentRoom.move(command);
+        document.getElementById("usertext").value = "";
+        displayRoomInfo(currentRoom);
+      } else {
+        alert("Not a valid command. Please try again.");
+        displayRoomInfo(currentRoom);
+        document.getElementById("usertext").value = "";
       }
-    });
-  };
-  
-  document
-    .getElementById("startGameButton")
-    .addEventListener("click", function () {
-      document.getElementById("startGameButton").style.display = "none";
-      document.getElementById("gamearea").style.display = "block";
-      startGame();
-    });
-  
-    
+    }
+  });
+};
+
+document
+  .getElementById("startGameButton")
+  .addEventListener("click", function () {
+    document.getElementById("startGameButton").style.display = "none";
+    document.getElementById("gamearea").style.display = "block";
+    startGame();
+  });

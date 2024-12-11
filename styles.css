@@ -25,7 +25,14 @@ h2 {
   text-shadow: 2px 2px 4px rgba(12, 11, 11, 0.2);
   margin-bottom: 30px;
 }
-
+input {
+  width: 150px; /* Set a smaller width */
+  padding: 5px 10px; /* Adjust padding to make it smaller */
+  font-size: 14px; /* Make the text inside the input smaller */
+  border: 1px solid #ccc; /* Border styling */
+  color: black; /* Text color */
+  background-color: white; /* Background color */
+}
 #main-container {
   display: flex;
   flex-direction: column;
@@ -231,4 +238,59 @@ h2 {
     left: 100%;
     transform: rotate(0deg);
   }
+}
+
+.question-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure the answer buttons are displayed in a row with space between them */
+.answer-wrapper {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Ensure the answer buttons are displayed in a row with space between them */
+.answer-wrapper {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Style for each answer button */
+.answer {
+  background-color: rgb(100, 149, 190);
+  padding: 15px 30px;
+  border-radius: 16px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  width: 150px;
+  height: 50px;
+
+  /* Flexbox to center text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Hover effect when the mouse is over the button */
+.answer:hover {
+  background-color: rgb(70, 130, 180);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Active effect when the button is clicked */
+.answer:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
