@@ -1,0 +1,334 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap");
+
+h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 8vw;
+  color: #0d0d0d;
+  text-align: center;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(61, 60, 60, 0.2);
+  margin-bottom: 30px;
+}
+h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 5vw;
+  color: gold;
+  text-align: center;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 4px rgba(12, 11, 11, 0.2);
+  margin-bottom: 30px;
+}
+input {
+  width: 150px; /* Set a smaller width */
+  padding: 5px 10px; /* Adjust padding to make it smaller */
+  font-size: 14px; /* Make the text inside the input smaller */
+  border: 1px solid #ccc; /* Border styling */
+  color: black; /* Text color */
+  background-color: white; /* Background color */
+}
+#main-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-image: url("versailles 2.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  opacity: 0.8;
+  justify-content: space-between;
+}
+
+#background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
+
+#content {
+  flex-grow: 1;
+  text-align: center;
+}
+
+/* Start Game Button */
+#startGameButton {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  color: white;
+  background-color: #0d0d0d;
+  border: 2px solid gold;
+  padding: 20px 40px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  margin: 30px auto;
+  display: block;
+}
+
+#startGameButton:hover {
+  background-color: gold;
+  color: black;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Start of game */
+
+/* Game Area Container */
+#game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  padding: 20px;
+  width: 80%;
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: "Merriweather", serif;
+  color: #0e0a05;
+}
+
+/* Styling for the text display area */
+#textarea {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  max-height: 300px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  width: 100%;
+}
+
+/* Styling for the input area */
+#usertext {
+  font-size: 1.2rem;
+  padding: 10px;
+  width: 80%;
+  max-width: 500px;
+  margin-top: 20px;
+  border: 2px solid #0d0d0d;
+  border-radius: 8px;
+  background-color: white;
+  color: #0d0d0d;
+}
+
+/* Button area for submitting the input */
+#buttonarea {
+  margin-top: 15px;
+  text-align: center;
+}
+
+#usertext:focus {
+  outline: none;
+  border-color: gold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #game-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  #textarea {
+    font-size: 1rem;
+  }
+
+  #usertext {
+    font-size: 1rem;
+    width: 100%;
+  }
+}
+/* Container for the room image */
+
+#room-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Styling the image */
+#room-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Footer styles */
+#footer {
+  background: url("Versailles.jpeg") no-repeat center center;
+  background-size: cover;
+
+  height: 300px;
+  color: #f0e5d8;
+  font-family: "Playfair Display", serif;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  text-align: center;
+  border-top: 20px solid gold;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 10;
+}
+
+#footer-content {
+  position: relative;
+  z-index: 10;
+}
+
+.footer-text {
+  font-size: 2rem;
+  font-family: "Merriweather", serif;
+  font-weight: bold;
+  color: #0e0a05;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+  margin-top: 20px;
+}
+
+/* Styling for the moving Marie Antoinette character */
+#marie-antoinette {
+  position: absolute;
+  bottom: 0;
+  left: -200px;
+  animation: moveMarie 9s linear infinite;
+}
+
+#marie-antoinette img {
+  width: 120px;
+  height: auto;
+  border-radius: 50%;
+  border: 5px solid #f8e1a5;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Animation for the Marie moving across the footer */
+@keyframes moveMarie {
+  0% {
+    left: -200px;
+    transform: rotate(0deg);
+  }
+  50% {
+    left: 50%;
+    transform: rotate(5deg);
+  }
+  100% {
+    left: 100%;
+    transform: rotate(0deg);
+  }
+}
+
+.question-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure the answer buttons are displayed in a row with space between them */
+.answer-wrapper {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Ensure the answer buttons are displayed in a row with space between them */
+.answer-wrapper {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Style for each answer button */
+.answer {
+  background-color: rgb(100, 149, 190);
+  padding: 15px 30px;
+  border-radius: 16px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  width: 150px;
+  height: 50px;
+
+  /* Flexbox to center text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Hover effect when the mouse is over the button */
+.answer:hover {
+  background-color: rgb(70, 130, 180);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Active effect when the button is clicked */
+.answer:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+/* Styling for the "Take me back to the Entrance" button */
+#backToEntranceButton {
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  color: white;
+  background-color: #8b0000;
+  border: 2px solid gold;
+  padding: 15px 0px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  display: block;
+  width: auto;
+  max-width: 250px;
+  margin: 20px auto;
+}
+
+/* Hover effect when the mouse is over the button */
+#backToEntranceButton:hover {
+  background-color: gold;
+  color: #0d0d0d;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Active effect when the button is clicked */
+#backToEntranceButton:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Hidden button by default */
+#backToEntranceButton.hidden {
+  display: none;
+}
