@@ -174,71 +174,6 @@ input {
   border-radius: 8px;
 }
 
-/* Footer styles */
-#footer {
-  background: url("Versailles.jpeg") no-repeat center center;
-  background-size: cover;
-
-  height: 300px;
-  color: #f0e5d8;
-  font-family: "Playfair Display", serif;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  text-align: center;
-  border-top: 20px solid gold;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-  position: relative;
-  z-index: 10;
-}
-
-#footer-content {
-  position: relative;
-  z-index: 10;
-}
-
-.footer-text {
-  font-size: 2rem;
-  font-family: "Merriweather", serif;
-  font-weight: bold;
-  color: #0e0a05;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
-  margin-top: 20px;
-}
-
-/* Styling for the moving Marie Antoinette character */
-#marie-antoinette {
-  position: absolute;
-  bottom: 0;
-  left: -200px;
-  animation: moveMarie 9s linear infinite;
-}
-
-#marie-antoinette img {
-  width: 120px;
-  height: auto;
-  border-radius: 50%;
-  border: 5px solid #f8e1a5;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Animation for the Marie moving across the footer */
-@keyframes moveMarie {
-  0% {
-    left: -200px;
-    transform: rotate(0deg);
-  }
-  50% {
-    left: 50%;
-    transform: rotate(5deg);
-  }
-  100% {
-    left: 100%;
-    transform: rotate(0deg);
-  }
-}
 
 .question-wrapper {
   display: flex;
@@ -310,8 +245,9 @@ input {
   transition: all 0.3s ease;
   display: block;
   width: auto;
-  max-width: 250px;
+  max-width: 400px;
   margin: 20px auto;
+  padding: 15px 30px;
 }
 
 /* Hover effect when the mouse is over the button */
@@ -331,4 +267,70 @@ input {
 /* Hidden button by default */
 #backToEntranceButton.hidden {
   display: none;
+}
+
+/* Footer styles */
+#footer {
+  background: url("Versailles.jpeg") no-repeat center center;
+  background-size: cover;
+
+  height: 300px;
+  color: #f0e5d8;
+  font-family: "Playfair Display", serif;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  text-align: center;
+  border-top: 20px solid gold;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 10;
+}
+
+#footer-content {
+  position: relative;
+  z-index: 10;
+}
+
+.footer-text {
+  font-size: 2rem;
+  font-family: "Merriweather", serif;
+  font-weight: bold;
+  color: #0e0a05;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+  margin-top: 20px;
+}
+
+/* Styling for the moving Marie Antoinette character */
+#marie-antoinette {
+  position: absolute;
+  bottom: 0;
+  left: -200px;
+  animation: moveMarie 9s linear infinite;
+}
+
+#marie-antoinette img {
+  width: 120px;
+  height: auto;
+  border-radius: 50%;
+  border: 5px solid #f8e1a5;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Animation for the Marie moving across the footer */
+@keyframes moveMarie {
+  0% {
+    left: -200px;
+    transform: rotate(0deg);
+  }
+  50% {
+    left: 50%;
+    transform: rotate(5deg);
+  }
+  100% {
+    left: 100%;
+    transform: rotate(0deg);
+  }
 }
