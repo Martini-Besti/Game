@@ -350,7 +350,11 @@ const startGame = () => {
     }
   });
 };
-
+document.getElementById("backToEntranceButton").addEventListener("click", function () {
+    currentRoom = Entrance;  // Set the current room back to Entrance
+    displayRoomInfo(currentRoom); // Re-display the room information for Entrance
+  });
+  
 document
   .getElementById("startGameButton")
   .addEventListener("click", function () {
