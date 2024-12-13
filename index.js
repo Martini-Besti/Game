@@ -370,6 +370,7 @@ const startGame = () => {
   // Add the 'hidden' class to <h1> and <h2> elements when the game starts
   document.querySelector("h1").classList.add("hidden");
   document.querySelector("h2").classList.add("hidden");
+  document.querySelector("h3").classList.add("hidden");
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
