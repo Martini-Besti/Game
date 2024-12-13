@@ -307,6 +307,8 @@ const displayRoomInfo = (room) => {
 
     // If the room is the GamesRoom, change the placeholder to the new text
     if (room === GamesRoom) {
+      // Hide the usertext input in the GamesRoom
+      document.getElementById("usertext").style.display = "none";
       document.getElementById("usertext").placeholder =
         "Answer the question above to gain access to the Ballroom";
     }
@@ -325,9 +327,10 @@ const displayRoomInfo = (room) => {
     document.getElementById("textarea").innerHTML = textContent;
   }
 
-  // Reset the placeholder to the default text when not in the GamesRoom
+  // Reset the placeholder and show usertext input when not in the GamesRoom
   if (room !== GamesRoom) {
     document.getElementById("usertext").placeholder = "Enter a command...";
+    document.getElementById("usertext").style.display = "block";
   }
 
   // Show or hide the "Take me back to the entrance" button if NOT in the Entrance
