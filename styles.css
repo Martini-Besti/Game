@@ -112,6 +112,8 @@ input {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   font-family: "Merriweather", serif;
   color: #0e0a05;
+ margin-bottom: 20px;
+ margin-top: 15px;
 }
 
 /* Styling for the text display area */
@@ -154,6 +156,8 @@ input {
   #game-container {
     width: 90%;
     padding: 15px;
+    margin-bottom: 15px;
+
   }
 
   #textarea {
@@ -283,7 +287,7 @@ input {
   background: url("Versailles.jpeg") no-repeat center center;
   background-size: cover;
 
-  height: 300px;
+  height: 200px;
   color: #f0e5d8;
   font-family: "Playfair Display", serif;
   padding: 20px;
