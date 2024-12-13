@@ -190,16 +190,16 @@ const Jeffrey = new character("Jeffrey");
 Jeffrey.description =
   "Jeffrey the butler is a snobbish tall bloke wearing his full butler kit. He'll help you open the next room.";
 Jeffrey.conversation =
-  "'Ca va? Here is your key to the Dungeon 🔑  Head south to the Dungeon and mind your step. Au revoir.'";
+  "'Ca va? Get yourself to Marie ASAP.  She is in the Ballroom. Here is your key to the Dungeon 🔑  Head south and mind your step. Au revoir.'";
 
 const Snuggles = new character("Snuggles");
 Snuggles.description = "Snuggles the snuggly dragon would like a snuggle.";
 Snuggles.conversation =
-  "'Bring it in here you! (snuggles you to the brink of breaking wind)... Your mission is clear. Head east but be careful. Napoleon is in a bad mood!'";
+  "'Bring it in here you! (snuggles you to the brink of breaking wind)... Your mission is clear is to get to the Marie. Head east but be careful. Napoleon is in a bad mood!'";
 
 const Napoleon = new character("Napoleon");
 Napoleon.description =
-  "Happy looking chap isn't he? He hangs out in the hall, unlike the paintings that once did before he unhung them. Don't listen to him, just keep on going weary traveler.";
+  "Happy looking chap isn't he? He hangs out in the hall, unlike the paintings that once did before he unhung them. Don't listen to him, just keep on going weary traveller.";
 Napoleon.conversation =
   "'Où penses-tu aller? Je t'accrocherai comme l'une de mes peintures si tu oses me passer!'";
 
@@ -367,7 +367,7 @@ const startGame = () => {
   let currentRoom = Entrance;
   displayRoomInfo(currentRoom);
 
-  // Add the 'hidden' class to <h1> and <h2> elements when the game starts
+  // Add the 'hidden' class to <h1>, <h2> and <h3> elements when the game starts
   document.querySelector("h1").classList.add("hidden");
   document.querySelector("h2").classList.add("hidden");
   document.querySelector("h3").classList.add("hidden");
