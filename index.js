@@ -166,7 +166,7 @@ const BallRoom = new room(
 GamesRoom.questions = [
   {
     question:
-      "Click the correct answer of what was Marie Antoinette's favourite food?",
+      "What is Marie Antoinette's favourite food? If you click the wrong answer you shall not only be sent back to the Entrance to start over again, but also loose your knighthood! So you better know my wife's favourite dish.",
     answer: "Roast Duck",
     options: [
       {
@@ -190,16 +190,16 @@ const Jeffrey = new character("Jeffrey");
 Jeffrey.description =
   "Jeffrey the butler is a snobbish tall bloke wearing his full butler kit. He'll help you open the next room.";
 Jeffrey.conversation =
-  "'Ca va? Get yourself to Marie ASAP.  She is in the Ballroom. Here is your key to the Dungeon 🔑  Head south and mind your step. Au revoir.'";
+  "'Ca va? Here is your key to the Dungeon 🔑  Head south to the Dungeon and mind your step. Au revoir.'";
 
 const Snuggles = new character("Snuggles");
 Snuggles.description = "Snuggles the snuggly dragon would like a snuggle.";
 Snuggles.conversation =
-  "'Bring it in here you! (snuggles you to the brink of breaking wind)... Your mission is clear is to get to the Marie. Head east but be careful. Napoleon is in a bad mood!'";
+  "'Bring it in here you! (snuggles you to the brink of breaking wind)... Your mission is clear. Head east but be careful. Napoleon is in a bad mood!'";
 
 const Napoleon = new character("Napoleon");
 Napoleon.description =
-  "Happy looking chap isn't he? He hangs out in the hall, unlike the paintings that once did before he unhung them. Don't listen to him, just keep on going weary traveller.";
+  "Happy looking chap isn't he? He hangs out in the hall, unlike the paintings that once did before he unhung them. Don't listen to him, just keep on going weary traveler.";
 Napoleon.conversation =
   "'Où penses-tu aller? Je t'accrocherai comme l'une de mes peintures si tu oses me passer!'";
 
@@ -257,6 +257,11 @@ const displayRoomInfo = (room) => {
 
     if (isCorrect) {
       room._correctAnswers++;
+    } else {
+      // If the answer is incorrect, send the player back to the entrance
+      currentRoom = Entrance;
+      displayRoomInfo(currentRoom);
+      return;
     }
 
     // Check if the correct answer is selected and move to BallRoom
@@ -346,28 +351,14 @@ const displayRoomInfo = (room) => {
   roomImage.src = roomImagePath;
 };
 
-// Back to Entrance or Restart Game button handler
-document
-  .getElementById("backToEntranceButton")
-  .addEventListener("click", function () {
-    // Check if we're in the BallRoom
-    if (currentRoom === BallRoom) {
-      // Restart the game by calling startGame
-      startGame();
-    } else {
-      // If not in the BallRoom, reset to the entrance as before
-      let currentRoom = Entrance;
-      displayRoomInfo(currentRoom);
-      document.getElementById("usertext").value = "";
-    }
-  });
+let currentRoom = Entrance;
 
 // Starting the game
 const startGame = () => {
-  let currentRoom = Entrance;
+  currentRoom = Entrance;
   displayRoomInfo(currentRoom);
 
-  // Add the 'hidden' class to <h1>, <h2> and <h3> elements when the game starts
+  // Add the 'hidden' class to <h1> and <h2> elements when the game starts
   document.querySelector("h1").classList.add("hidden");
   document.querySelector("h2").classList.add("hidden");
   document.querySelector("h3").classList.add("hidden");
@@ -390,22 +381,26 @@ const startGame = () => {
     }
   });
 };
-
-// Back to Entrance button handler
+// Back to Entrance or Restart Game button handler
 document
   .getElementById("backToEntranceButton")
   .addEventListener("click", function () {
-    // Reset the current room to Entrance
-    let currentRoom = Entrance;
-    displayRoomInfo(currentRoom); // Display the entrance room
-
-    // Reset the input for next command (prevent any lingering input)
-    document.getElementById("usertext").value = "";
+    // Check if we're in the BallRoom
+    if (currentRoom === BallRoom) {
+      // Restart the game by calling startGame
+      startGame();
+    } else {
+      // If not in the BallRoom, reset to the entrance as before
+      currentRoom = Entrance;
+      displayRoomInfo(currentRoom);
+      document.getElementById("usertext").value = "";
+    }
   });
 
 document
   .getElementById("startGameButton")
   .addEventListener("click", function () {
+    console.log("411");
     document.getElementById("startGameButton").style.display = "none";
     document.getElementById("gamearea").style.display = "block";
     startGame();
